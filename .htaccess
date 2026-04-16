@@ -1,0 +1,8 @@
+Options -Indexes
+RewriteEngine On
+
+# Si ya estamos en el index público, no seguimos reescribiendo.
+RewriteRule ^public/index\.php$ - [END]
+
+# Cualquier acceso a /TP/... también pasa por el mismo index.
+RewriteRule ^.*$ public/index.php [END,QSA]
