@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /TP/
+
+# Si entran a la base del proyecto, redirigir a /public/
+RewriteRule ^$ public/ [L,R=302]
+
+# Si ya está dentro de public, no seguir reescribiendo
+RewriteRule ^public/ - [L]
+
+# Si no es archivo ni carpeta real, enviar todo a public/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ public/index.php [QSA,L]
