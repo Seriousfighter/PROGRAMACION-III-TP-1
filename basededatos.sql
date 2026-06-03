@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2026 a las 21:32:22
+-- Tiempo de generación: 03-06-2026 a las 16:54:16
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,37 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tu_dulce_eleccion2`
+-- Base de datos: `tu_dulce_eleccion`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clientes`
---
-
-CREATE TABLE `clientes` (
-  `clientes_id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `direccion` varchar(200) DEFAULT NULL,
-  `contrasena_hash` varchar(255) DEFAULT NULL,
-  `rol` enum('cliente','admin') NOT NULL DEFAULT 'cliente',
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`clientes_id`, `nombre`, `email`, `telefono`, `direccion`, `contrasena_hash`, `rol`, `fecha_registro`) VALUES
-(1, 'Admin Principal', 'admin@pasteleria.com', '111111111', 'Oficina Central', '$2y$10$EjemploHashAdmin123', 'admin', '2026-04-14 23:13:02'),
-(2, 'Laura Martínez', 'laura@pasteleria.com', '222222222', 'Sucursal Norte', '$2y$10$EjemploHashLaura456', 'admin', '2026-04-14 23:13:02'),
-(3, 'Juan Pérez', 'juan@email.com', '123456789', 'Calle Principal 123', NULL, 'cliente', '2026-04-14 23:13:02'),
-(4, 'María Gómez', 'maria@email.com', '987654321', 'Avenida Central 456', NULL, 'cliente', '2026-04-14 23:13:02'),
-(5, 'Carlos López', 'carlos@email.com', '555555555', 'Plaza Mayor 789', '$2y$10$ClienteConCuenta789', 'cliente', '2026-04-14 23:13:02'),
-(6, 'Ana Rodríguez', 'ana@email.com', '444444444', 'Barrio Los Pinos 321', NULL, 'cliente', '2026-04-14 23:13:02');
 
 -- --------------------------------------------------------
 
@@ -83,7 +54,7 @@ INSERT INTO `coberturas` (`coberturas_id`, `nombre`, `precio_extra`) VALUES
 
 CREATE TABLE `pedidos` (
   `pedidos_id` int(11) NOT NULL,
-  `clientes_id` int(11) NOT NULL,
+  `usuarios_id` int(11) NOT NULL,
   `fecha_pedido` date NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `total` decimal(10,2) NOT NULL,
@@ -94,7 +65,7 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`pedidos_id`, `clientes_id`, `fecha_pedido`, `fecha_entrega`, `total`, `estado`) VALUES
+INSERT INTO `pedidos` (`pedidos_id`, `usuarios_id`, `fecha_pedido`, `fecha_entrega`, `total`, `estado`) VALUES
 (1, 3, '2026-04-14', '2026-04-17', 9400.00, 'pendiente');
 
 -- --------------------------------------------------------
@@ -255,6 +226,35 @@ INSERT INTO `tortas_rellenos` (`tortas_id`, `rellenos_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `usuarios_id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `contrasena_hash` varchar(255) DEFAULT NULL,
+  `rol` enum('cliente','admin') NOT NULL DEFAULT 'cliente',
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usuarios_id`, `nombre`, `email`, `telefono`, `direccion`, `contrasena_hash`, `rol`, `fecha_registro`) VALUES
+(1, 'Admin Principal', 'admin@pasteleria.com', '111111111', 'Oficina Central', '$2y$10$EjemploHashAdmin123', 'admin', '2026-04-14 23:13:02'),
+(2, 'Laura Martínez', 'laura@pasteleria.com', '222222222', 'Sucursal Norte', '$2y$10$EjemploHashLaura456', 'admin', '2026-04-14 23:13:02'),
+(3, 'Juan Pérez', 'juan@email.com', '123456789', 'Calle Principal 123', NULL, 'cliente', '2026-04-14 23:13:02'),
+(4, 'María Gómez', 'maria@email.com', '987654321', 'Avenida Central 456', NULL, 'cliente', '2026-04-14 23:13:02'),
+(5, 'Carlos López', 'carlos@email.com', '555555555', 'Plaza Mayor 789', '$2y$10$ClienteConCuenta789', 'cliente', '2026-04-14 23:13:02'),
+(6, 'Ana Rodríguez', 'ana@email.com', '444444444', 'Barrio Los Pinos 321', NULL, 'cliente', '2026-04-14 23:13:02');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `vista_pedidos_completos`
 -- (Véase abajo para la vista actual)
 --
@@ -333,7 +333,7 @@ CREATE TABLE `vista_pedido_unico` (
 --
 DROP TABLE IF EXISTS `vista_pedidos_completos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_completos`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente_nombre`, `c`.`telefono` AS `cliente_telefono`, `c`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion` FROM (`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_completos`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `u`.`nombre` AS `cliente_nombre`, `u`.`telefono` AS `cliente_telefono`, `u`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion` FROM (`pedidos` `p` join `usuarios` `u` on(`p`.`usuarios_id` = `u`.`usuarios_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -342,7 +342,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vista_pedidos_detalle`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_detalle`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente_nombre`, `c`.`telefono` AS `cliente_telefono`, `c`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido_formato`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega_formato`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, coalesce(`s`.`precio_extra`,0) AS `sabor_precio_extra`, `co`.`nombre` AS `cobertura`, coalesce(`co`.`precio_extra`,0) AS `cobertura_precio_extra`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, `tm`.`precio_base` AS `precio_base`, coalesce(group_concat(distinct `r`.`nombre` order by `r`.`nombre` ASC separator ' + '),'Sin relleno') AS `rellenos`, coalesce(group_concat(distinct concat(`r`.`nombre`,' ($',format(coalesce(`r`.`precio_extra`,0),0),')') separator ', '),'Sin relleno') AS `rellenos_con_precio`, coalesce(sum(`r`.`precio_extra`),0) AS `total_extra_rellenos`, `t`.`precio_unitario` AS `precio_unitario` FROM (((((((`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) left join `tortas_rellenos` `tr` on(`t`.`tortas_id` = `tr`.`tortas_id`)) left join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) GROUP BY `t`.`tortas_id`, `p`.`pedidos_id`, `c`.`clientes_id`, `s`.`sabores_id`, `co`.`coberturas_id`, `tm`.`tamanos_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_detalle`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `u`.`nombre` AS `cliente_nombre`, `u`.`telefono` AS `cliente_telefono`, `u`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido_formato`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega_formato`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, coalesce(`s`.`precio_extra`,0) AS `sabor_precio_extra`, `co`.`nombre` AS `cobertura`, coalesce(`co`.`precio_extra`,0) AS `cobertura_precio_extra`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, `tm`.`precio_base` AS `precio_base`, coalesce(group_concat(distinct `r`.`nombre` order by `r`.`nombre` ASC separator ' + '),'Sin relleno') AS `rellenos`, coalesce(group_concat(distinct concat(`r`.`nombre`,' ($',format(coalesce(`r`.`precio_extra`,0),0),')') separator ', '),'Sin relleno') AS `rellenos_con_precio`, coalesce(sum(`r`.`precio_extra`),0) AS `total_extra_rellenos`, `t`.`precio_unitario` AS `precio_unitario` FROM (((((((`pedidos` `p` join `usuarios` `u` on(`p`.`usuarios_id` = `u`.`usuarios_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) left join `tortas_rellenos` `tr` on(`t`.`tortas_id` = `tr`.`tortas_id`)) left join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) GROUP BY `t`.`tortas_id`, `p`.`pedidos_id`, `u`.`usuarios_id`, `s`.`sabores_id`, `co`.`coberturas_id`, `tm`.`tamanos_id` ;
 
 -- --------------------------------------------------------
 
@@ -351,18 +351,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vista_pedido_unico`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedido_unico`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente`, `c`.`telefono` AS `telefono`, `c`.`direccion` AS `direccion`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega`, concat('S/. ',format(`p`.`total`,2)) AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, (select group_concat(`r`.`nombre` separator ' + ') from (`tortas_rellenos` `tr` join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) where `tr`.`tortas_id` = `t`.`tortas_id`) AS `rellenos`, `co`.`nombre` AS `cobertura`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, concat('S/. ',format(`t`.`precio_unitario`,2)) AS `precio_unitario` FROM (((((`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedido_unico`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `u`.`nombre` AS `cliente`, `u`.`telefono` AS `telefono`, `u`.`direccion` AS `direccion`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega`, concat('S/. ',format(`p`.`total`,2)) AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, (select group_concat(`r`.`nombre` separator ' + ') from (`tortas_rellenos` `tr` join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) where `tr`.`tortas_id` = `t`.`tortas_id`) AS `rellenos`, `co`.`nombre` AS `cobertura`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, concat('S/. ',format(`t`.`precio_unitario`,2)) AS `precio_unitario` FROM (((((`pedidos` `p` join `usuarios` `u` on(`p`.`usuarios_id` = `u`.`usuarios_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) ;
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`clientes_id`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indices de la tabla `coberturas`
@@ -377,7 +370,7 @@ ALTER TABLE `coberturas`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`pedidos_id`),
-  ADD KEY `clientes_id` (`clientes_id`),
+  ADD KEY `usuarios_id` (`usuarios_id`),
   ADD KEY `fecha_pedido` (`fecha_pedido`);
 
 --
@@ -419,14 +412,15 @@ ALTER TABLE `tortas_rellenos`
   ADD KEY `rellenos_id` (`rellenos_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indices de la tabla `usuarios`
 --
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`usuarios_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT de la tabla `clientes`
+-- AUTO_INCREMENT de las tablas volcadas
 --
-ALTER TABLE `clientes`
-  MODIFY `clientes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `coberturas`
@@ -465,6 +459,12 @@ ALTER TABLE `tortas`
   MODIFY `tortas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `usuarios_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -472,7 +472,7 @@ ALTER TABLE `tortas`
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `fk_pedidos_cliente` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`clientes_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pedidos_usuario` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`usuarios_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tortas`
