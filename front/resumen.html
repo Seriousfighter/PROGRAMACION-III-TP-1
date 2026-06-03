@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de tu pedido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="resumen-container">
+        <a href="cliente.html" class="back-link">← Volver</a>
+        <h1>🍰 Tu Dulce Elección</h1>
+        
+        <div class="resumen-card">
+            <h2>Resumen</h2>
+            
+            <div class="resumen-item">
+                <span class="label">Tamaño:</span>
+                <span id="resumenTamanio" class="value">-</span>
+            </div>
+            <div class="resumen-item">
+                <span class="label">Gusto:</span>
+                <span id="resumenGusto" class="value">-</span>
+            </div>
+            <div class="resumen-item">
+                <span class="label">Rellenos:</span>
+                <span id="resumenRellenos" class="value">-</span>
+            </div>
+            <div class="resumen-item total">
+                <span class="label">Total:</span>
+                <span id="resumenTotal" class="value">$0</span>
+            </div>
+            
+            <div class="resumen-item">
+                <span class="label">Fecha y retiro a coordinar</span>
+            </div>
+            
+            <button class="btn-primary" id="finalizarPedidoBtn">Al horno! 🎂</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
