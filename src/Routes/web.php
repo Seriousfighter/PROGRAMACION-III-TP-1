@@ -8,6 +8,7 @@ use App\Controllers\IngredientsController;
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
+use App\Controllers\PedidoController;
 
 //login register
 $router->get('/login', [AuthController::class, 'showLogin']); //falta implementar el login, pero es solo para mostrar como se haria, no es necesario para el TP
@@ -21,7 +22,8 @@ $router->get('/about', [HomeController::class, 'about']); //ejemplo, no es neces
 $router->get('/contact', [HomeController::class, 'contact']); //ejemplo
 
 $router->get('/panel', [PanelController::class, 'panel']); //ejemplo
-
+// Rutas para pedidos
+$router->get('/pedidos', [PedidoController::class, 'index']);
 $router->get('/ingredients', [IngredientsController::class, 'index']);
 $router->get('/ingredients/create', [IngredientsController::class, 'create']);
 $router->post('/ingredients', [IngredientsController::class, 'store']);
