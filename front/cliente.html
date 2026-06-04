@@ -6,13 +6,19 @@
     <title>Personalizar mi torta - Tu Dulce Elección</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            background: linear-gradient(135deg, #f0c3db 0%, #f7d0e0 100%);
+            min-height: 100vh;
+        }
+
         .customize-container {
             max-width: 1200px;
             margin: 2rem auto;
-            background: #FFF9F5;
+            background: white;
             border-radius: 45px;
             padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 40px rgba(254, 57, 185, 0.1);
+            border: 1px solid #ffa4c8;
         }
 
         .customize-layout {
@@ -23,15 +29,15 @@
         }
 
         .option-group {
-            background: #FFF5F0;
+            background: #f7d0e0;
             padding: 1.5rem;
             border-radius: 30px;
             margin-bottom: 1.5rem;
-            border: 1px solid #FFE0D8;
+            border: 1px solid #ffa4c8;
         }
 
         .option-group h3 {
-            color: #E87A5D;
+            color: #fe39b9;
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
@@ -50,14 +56,15 @@
             padding: 0.5rem 1rem;
             background: white;
             border-radius: 40px;
-            border: 1px solid #FFD4CC;
+            border: 1px solid #ffa4c8;
             transition: all 0.2s;
+            color: #8B5E3C;
         }
 
         .size-options label:has(input:checked) {
-            background: #FF9B85;
+            background: #fe39b9;
             color: white;
-            border-color: #FF9B85;
+            border-color: #fe39b9;
         }
 
         .rellenos-grid {
@@ -74,56 +81,64 @@
             padding: 0.5rem 0.8rem;
             background: white;
             border-radius: 30px;
-            border: 1px solid #FFD4CC;
+            border: 1px solid #ffa4c8;
             transition: all 0.2s;
+            color: #8B5E3C;
         }
 
         .rellenos-grid label:has(input:checked) {
-            background: #FFE4E0;
-            border-color: #FF9B85;
+            background: #f0c3db;
+            border-color: #fe39b9;
         }
 
         select {
             width: 100%;
             padding: 0.8rem 1rem;
-            border: 2px solid #FFD4CC;
+            border: 2px solid #ffa4c8;
             border-radius: 40px;
             font-size: 1rem;
             background: white;
             font-family: inherit;
+            color: #8B5E3C;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #fe39b9;
         }
 
         .selected-panel {
-            background: linear-gradient(145deg, #FFF0F0 0%, #FFE8E0 100%);
+            background: linear-gradient(145deg, #f0c3db 0%, #f7d0e0 100%);
             padding: 1.8rem;
             border-radius: 35px;
             position: sticky;
             top: 20px;
-            border: 1px solid #FFD4CC;
+            border: 1px solid #ffa4c8;
             text-align: center;
         }
 
         .selected-panel h3 {
-            color: #E87A5D;
+            color: #fe39b9;
             margin-bottom: 1.2rem;
         }
 
         .elegidos-list {
             min-height: 180px;
             margin: 1.2rem 0;
-            background: #FFF9F5;
+            background: white;
             border-radius: 25px;
             padding: 1rem;
         }
 
         .elegido-item {
             padding: 0.5rem;
-            border-bottom: 1px dashed #FFD4CC;
-            color: #A8765A;
+            border-bottom: 1px dashed #ffa4c8;
+            color: #8B5E3C;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #FF9B85 0%, #E87A5D 100%);
+            background: linear-gradient(135deg, #fe39b9 0%, #e976a7 100%);
             color: white;
             border: none;
             padding: 0.9rem 1.5rem;
@@ -137,19 +152,29 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(232, 122, 93, 0.3);
+            box-shadow: 0 6px 14px rgba(254, 57, 185, 0.3);
+            background: linear-gradient(135deg, #ff6bc9 0%, #fe39b9 100%);
         }
 
         .back-link {
             display: inline-block;
             margin-bottom: 1.5rem;
-            color: #E87A5D;
+            color: #fe39b9;
             text-decoration: none;
             font-weight: 600;
         }
 
+        .back-link:hover {
+            color: #e976a7;
+        }
+
         .empty-message {
-            color: #D4A594;
+            color: #e976a7;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fe39b9 !important;
             text-align: center;
         }
 
@@ -163,7 +188,7 @@
 <body>
     <div class="customize-container">
         <a href="index.html" class="back-link">← Volver</a>
-        <h1 style="color: #E87A5D; text-align: center;">🍰 Tu Dulce Elección</h1>
+        <h1>🍰 Tu Dulce Elección</h1>
         
         <div class="customize-layout">
             <!-- Columna izquierda: Opciones -->
@@ -171,14 +196,14 @@
                 <div class="option-group">
                     <h3>📏 Tamaño:</h3>
                     <div class="size-options" id="tamaniosContainer">
-                        <!-- Los tamaños se cargan dinámicamente -->
-                        <p>Cargando tamaños...</p>
+                        <p style="color: #e976a7;">Cargando tamaños...</p>
                     </div>
                 </div>
 
                 <div class="option-group">
                     <h3>🍰 Gustos (Base):</h3>
                     <select id="gustoBase">
+                        <option value="" selected disabled>-- Seleccionar gusto --</option>
                         <option value="Vainilla">Vainilla</option>
                         <option value="Chocolate">Chocolate</option>
                         <option value="Lemon Pie">Lemon Pie</option>
@@ -191,19 +216,18 @@
                 <div class="option-group">
                     <h3>🥄 RELLENOS:</h3>
                     <div class="rellenos-grid" id="rellenosContainer">
-                        <!-- Los rellenos se cargan dinámicamente -->
-                        <p>Cargando rellenos...</p>
+                        <p style="color: #e976a7;">Cargando rellenos...</p>
                     </div>
                 </div>
             </div>
 
             <!-- Columna derecha: Elegidos y confirmar -->
             <div class="selected-panel">
-                <h3>✨ Elegidos:</h3>
+                <h3>Elegidos:</h3>
                 <div id="elegidosList" class="elegidos-list">
-                    <p class="empty-message">Aún no has seleccionado nada</p>
+                    <p class="empty-message">Elegí los ingredientes de tu torta</p>
                 </div>
-                <button class="btn-primary" id="confirmarPedidoBtn">Confirmar Pedido 🎂</button>
+                <button class="btn-primary" id="confirmarPedidoBtn">Confirmar Pedido</button>
             </div>
         </div>
     </div>
@@ -214,10 +238,8 @@
             const container = document.getElementById('tamaniosContainer');
             if(!container) return;
             
-            // Obtener tamaños del localStorage (los que admin gestiona)
             let tamanios = JSON.parse(localStorage.getItem('tamanios'));
             
-            // Si no hay datos en localStorage, usar valores por defecto
             if(!tamanios || tamanios.length === 0) {
                 tamanios = [
                     { nombre: "Chica", precio: 1800 },
@@ -227,7 +249,6 @@
                 localStorage.setItem('tamanios', JSON.stringify(tamanios));
             }
             
-            // Generar HTML de tamaños
             container.innerHTML = tamanios.map(tam => `
                 <label>
                     <input type="radio" name="tamanio" value="${tam.nombre}" data-precio="${tam.precio}">
@@ -235,7 +256,6 @@
                 </label>
             `).join('');
             
-            // Agregar eventos a los radios
             document.querySelectorAll('input[name="tamanio"]').forEach(radio => {
                 radio.addEventListener('change', actualizarElegidos);
             });
@@ -245,10 +265,8 @@
             const container = document.getElementById('rellenosContainer');
             if(!container) return;
             
-            // Obtener ingredientes del localStorage (los que admin gestiona)
             let ingredientes = JSON.parse(localStorage.getItem('ingredientes'));
             
-            // Si no hay datos en localStorage, usar valores por defecto
             if(!ingredientes || ingredientes.length === 0) {
                 ingredientes = [
                     "Dulce de Leche", "Frutilla", "Mantecol", "Bon o Bon", 
@@ -257,14 +275,12 @@
                 localStorage.setItem('ingredientes', JSON.stringify(ingredientes));
             }
             
-            // Generar HTML de rellenos
             container.innerHTML = ingredientes.map(ing => `
                 <label>
                     <input type="checkbox" value="${ing}"> ${ing}
                 </label>
             `).join('');
             
-            // Agregar eventos a los checkboxes
             document.querySelectorAll('#rellenosContainer input[type="checkbox"]').forEach(cb => {
                 cb.addEventListener('change', actualizarElegidos);
             });
@@ -277,37 +293,32 @@
             
             let seleccionados = [];
             
-            // Tamaño seleccionado
             const tamanioSeleccionado = document.querySelector('input[name="tamanio"]:checked');
             if(tamanioSeleccionado) {
-                seleccionados.push(`📏 Tamaño: ${tamanioSeleccionado.value}`);
+                seleccionados.push(`Tamaño: ${tamanioSeleccionado.value}`);
             }
             
-            // Gusto base
             const gustoSelect = document.getElementById('gustoBase');
-            if(gustoSelect && gustoSelect.value) {
-                seleccionados.push(`🍰 Base: ${gustoSelect.value}`);
+            if(gustoSelect && gustoSelect.value && gustoSelect.value !== '') {
+                seleccionados.push(`Base: ${gustoSelect.value}`);
             }
             
-            // Rellenos seleccionados
             const rellenosSeleccionados = Array.from(document.querySelectorAll('#rellenosContainer input[type="checkbox"]:checked'))
                 .map(cb => cb.value);
             
             rellenosSeleccionados.forEach(relleno => {
-                seleccionados.push(`🥄 ${relleno}`);
+                seleccionados.push(`${relleno}`);
             });
             
-            // Mostrar en el panel
             if(seleccionados.length === 0) {
-                elegidosDiv.innerHTML = '<p class="empty-message">✨ Elegí los ingredientes de tu torta ✨</p>';
+                elegidosDiv.innerHTML = '<p class="empty-message">Elegí los ingredientes de tu torta</p>';
             } else {
-                elegidosDiv.innerHTML = seleccionados.map(s => `<div class="elegido-item">❤️ ${s}</div>`).join('');
+                elegidosDiv.innerHTML = seleccionados.map(s => `<div class="elegido-item">• ${s}</div>`).join('');
             }
         }
         
         // ========== CALCULAR TOTAL ==========
         function calcularTotal() {
-            // Obtener precio del tamaño seleccionado
             const tamanioSeleccionado = document.querySelector('input[name="tamanio"]:checked');
             let precioBase = 0;
             
@@ -317,7 +328,6 @@
                 precioBase = tamanioEncontrado ? tamanioEncontrado.precio : 2000;
             }
             
-            // Contar rellenos seleccionados
             const rellenosSeleccionados = document.querySelectorAll('#rellenosContainer input[type="checkbox"]:checked').length;
             const extraPorRelleno = 250;
             
@@ -327,21 +337,25 @@
         // ========== CONFIRMAR PEDIDO ==========
         function confirmarPedido() {
             const tamanioSeleccionado = document.querySelector('input[name="tamanio"]:checked');
+            const gusto = document.getElementById('gustoBase').value;
             
             if(!tamanioSeleccionado) {
-                alert('🍰 Por favor, seleccioná el tamaño de tu torta');
+                alert('Por favor, seleccioná el tamaño de tu torta');
                 return;
             }
             
-            const gusto = document.getElementById('gustoBase').value;
+            if(!gusto || gusto === '') {
+                alert('Por favor, seleccioná un gusto base');
+                return;
+            }
+            
             const rellenos = Array.from(document.querySelectorAll('#rellenosContainer input[type="checkbox"]:checked'))
                 .map(cb => cb.value);
             const total = calcularTotal();
             
-            // Obtener nombre del cliente (podés pedirlo)
             let clienteNombre = localStorage.getItem('clienteNombre');
             if(!clienteNombre) {
-                clienteNombre = prompt('📝 Ingresá tu nombre para el pedido:', 'Cliente');
+                clienteNombre = prompt('Ingresá tu nombre para el pedido:', 'Cliente');
                 if(clienteNombre) {
                     localStorage.setItem('clienteNombre', clienteNombre);
                 } else {
@@ -360,15 +374,13 @@
                 estado: 'Pendiente'
             };
             
-            // Guardar pedido
             let pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
-            pedidos.unshift(pedido); // Agregar al principio
+            pedidos.unshift(pedido);
             localStorage.setItem('pedidos', JSON.stringify(pedidos));
             
-            // Guardar pedido temporal para el resumen
             localStorage.setItem('pedidoTemp', JSON.stringify(pedido));
             
-            alert(`✅ ¡Pedido confirmado!\nTotal: $${total.toLocaleString()}\nEn breve nos contactamos.`);
+            alert(`¡Pedido confirmado!\nTotal: $${total.toLocaleString()}\nEn breve nos contactamos.`);
             window.location.href = 'gracias.html';
         }
         
@@ -377,7 +389,6 @@
             cargarTamanios();
             cargarIngredientes();
             
-            // Eventos adicionales
             const gustoSelect = document.getElementById('gustoBase');
             if(gustoSelect) {
                 gustoSelect.addEventListener('change', actualizarElegidos);

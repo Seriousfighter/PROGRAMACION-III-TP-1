@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Dulce Elección - Tu torta ideal</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="landing-container">
+<?php include 'header.php'; ?>
+<div class="landing-container">
         <div class="landing-content">
             <h1 class="brand-title">🍰 Tu Dulce Elección</h1>
             <h2 class="subtitle">TU TORTA IDEAL</h2>
@@ -20,10 +12,8 @@
                 <button class="btn-outline" onclick="location.href='registro.html?tab=login'">Iniciar sesión</button>
             </div>
             <div style="text-align: center; margin-top: 1rem;">
-    <a href="admin-login.html" style="color: #E87A5D; font-size: 0.85rem; text-decoration: none;">👑 Acceso Administradores</a>
+    <a href="admin-login.html" style="color: #fe39b9; font-size: 0.85rem; text-decoration: none;">👑 Acceso Administradores</a>
 </div>
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+<?php include 'footer.php'; ?>

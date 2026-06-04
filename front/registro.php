@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro / Iniciar Sesión</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<php include 'header.php'; ?>
     <div class="auth-container">
-        <button class="btn-outline" onclick="location.href='./index.html'">Volver</button>
+        <button class="btn-outline" onclick="location.href='./index.php'">Volver</button>
         <h1 class="brand-title-small">🍰 Tu Dulce Elección</h1>
         <p class="subtitle-small">Diseñá tu torta perfecta de forma rápida y fácil.</p>
         
@@ -65,5 +57,4 @@
         
     </div>
     <script src="script.js"></script>
-</body>
-</html>
+<?php include 'footer.php'; ?>
