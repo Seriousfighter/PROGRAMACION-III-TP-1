@@ -8,6 +8,7 @@ use App\Controllers\IngredientsController;
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
+use App\Controllers\CoberturaController;
 
 //login register
 $router->get('/login', [AuthController::class, 'showLogin']); //falta implementar el login, pero es solo para mostrar como se haria, no es necesario para el TP
@@ -29,4 +30,5 @@ $router->get('/ingredients/{id:number}', [IngredientsController::class, 'show'])
 $router->put('/ingredients/{id:number}', [IngredientsController::class, 'update']); //faltan
 $router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan
 
+$router->get('/cobertura', [CoberturaController::class, 'index']);
 
