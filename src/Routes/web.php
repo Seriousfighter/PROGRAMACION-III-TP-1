@@ -30,5 +30,23 @@ $router->get('/ingredients/{id:number}', [IngredientsController::class, 'show'])
 $router->put('/ingredients/{id:number}', [IngredientsController::class, 'update']); //faltan
 $router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan
 
-$router->get('/cobertura', [CoberturaController::class, 'index']);
+// Coberturas
+$router->get('/coberturas', [CoberturaController::class, 'index']);
+$router->get('/coberturas/create', [CoberturaController::class, 'create']);
+$router->post('/coberturas', [CoberturaController::class, 'store']);
+$router->get('/coberturas/{id:number}', [CoberturaController::class, 'show']);
+$router->get('/coberturas/{id:number}/edit', [CoberturaController::class, 'edit']);
+$router->put('/coberturas/{id:number}', [CoberturaController::class, 'update']);
+$router->delete('/coberturas/{id:number}', [CoberturaController::class, 'destroy']);
 
+//rellenos
+use App\Controllers\RellenoController;
+
+// Rellenos
+$router->get('/rellenos', [RellenoController::class, 'index']);
+$router->get('/rellenos/create', [RellenoController::class, 'create']);
+$router->post('/rellenos', [RellenoController::class, 'store']);
+$router->get('/rellenos/{id:number}', [RellenoController::class, 'show']);
+$router->get('/rellenos/{id:number}/edit', [RellenoController::class, 'edit']);
+$router->put('/rellenos/{id:number}', [RellenoController::class, 'update']);
+$router->delete('/rellenos/{id:number}', [RellenoController::class, 'destroy']);
