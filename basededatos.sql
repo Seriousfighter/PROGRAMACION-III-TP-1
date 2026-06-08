@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2026 a las 21:32:22
+-- Tiempo de generación: 03-06-2026 a las 16:54:16
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,37 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tu_dulce_eleccion2`
+-- Base de datos: `tu_dulce_eleccion`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clientes`
---
-
-CREATE TABLE `clientes` (
-  `clientes_id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `direccion` varchar(200) DEFAULT NULL,
-  `contrasena_hash` varchar(255) DEFAULT NULL,
-  `rol` enum('cliente','admin') NOT NULL DEFAULT 'cliente',
-  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`clientes_id`, `nombre`, `email`, `telefono`, `direccion`, `contrasena_hash`, `rol`, `fecha_registro`) VALUES
-(1, 'Admin Principal', 'admin@pasteleria.com', '111111111', 'Oficina Central', '$2y$10$EjemploHashAdmin123', 'admin', '2026-04-14 23:13:02'),
-(2, 'Laura Martínez', 'laura@pasteleria.com', '222222222', 'Sucursal Norte', '$2y$10$EjemploHashLaura456', 'admin', '2026-04-14 23:13:02'),
-(3, 'Juan Pérez', 'juan@email.com', '123456789', 'Calle Principal 123', NULL, 'cliente', '2026-04-14 23:13:02'),
-(4, 'María Gómez', 'maria@email.com', '987654321', 'Avenida Central 456', NULL, 'cliente', '2026-04-14 23:13:02'),
-(5, 'Carlos López', 'carlos@email.com', '555555555', 'Plaza Mayor 789', '$2y$10$ClienteConCuenta789', 'cliente', '2026-04-14 23:13:02'),
-(6, 'Ana Rodríguez', 'ana@email.com', '444444444', 'Barrio Los Pinos 321', NULL, 'cliente', '2026-04-14 23:13:02');
 
 -- --------------------------------------------------------
 
@@ -57,7 +28,7 @@ INSERT INTO `clientes` (`clientes_id`, `nombre`, `email`, `telefono`, `direccion
 --
 
 CREATE TABLE `coberturas` (
-  `coberturas_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `precio_extra` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -66,7 +37,7 @@ CREATE TABLE `coberturas` (
 -- Volcado de datos para la tabla `coberturas`
 --
 
-INSERT INTO `coberturas` (`coberturas_id`, `nombre`, `precio_extra`) VALUES
+INSERT INTO `coberturas` (`id`, `nombre`, `precio_extra`) VALUES
 (1, 'Merengue', 0.00),
 (2, 'Chocolate', 500.00),
 (3, 'Crema', 0.00),
@@ -82,8 +53,8 @@ INSERT INTO `coberturas` (`coberturas_id`, `nombre`, `precio_extra`) VALUES
 --
 
 CREATE TABLE `pedidos` (
-  `pedidos_id` int(11) NOT NULL,
-  `clientes_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `fecha_pedido` date NOT NULL,
   `fecha_entrega` date DEFAULT NULL,
   `total` decimal(10,2) NOT NULL,
@@ -94,7 +65,7 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`pedidos_id`, `clientes_id`, `fecha_pedido`, `fecha_entrega`, `total`, `estado`) VALUES
+INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha_pedido`, `fecha_entrega`, `total`, `estado`) VALUES
 (1, 3, '2026-04-14', '2026-04-17', 9400.00, 'pendiente');
 
 -- --------------------------------------------------------
@@ -104,7 +75,7 @@ INSERT INTO `pedidos` (`pedidos_id`, `clientes_id`, `fecha_pedido`, `fecha_entre
 --
 
 CREATE TABLE `rellenos` (
-  `rellenos_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `precio_extra` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -113,7 +84,7 @@ CREATE TABLE `rellenos` (
 -- Volcado de datos para la tabla `rellenos`
 --
 
-INSERT INTO `rellenos` (`rellenos_id`, `nombre`, `precio_extra`) VALUES
+INSERT INTO `rellenos` (`id`, `nombre`, `precio_extra`) VALUES
 (1, 'Dulce de leche', 0.00),
 (2, 'Crema pastelera', 0.00),
 (3, 'Frutilla', 600.00),
@@ -131,7 +102,7 @@ INSERT INTO `rellenos` (`rellenos_id`, `nombre`, `precio_extra`) VALUES
 --
 
 CREATE TABLE `sabores` (
-  `sabores_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `precio_extra` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -140,7 +111,7 @@ CREATE TABLE `sabores` (
 -- Volcado de datos para la tabla `sabores`
 --
 
-INSERT INTO `sabores` (`sabores_id`, `nombre`, `precio_extra`) VALUES
+INSERT INTO `sabores` (`id`, `nombre`, `precio_extra`) VALUES
 (1, 'Chocolate', 0.00),
 (2, 'Vainilla', 0.00),
 (3, 'Frutilla', 500.00),
@@ -156,7 +127,7 @@ INSERT INTO `sabores` (`sabores_id`, `nombre`, `precio_extra`) VALUES
 --
 
 CREATE TABLE `tamanos` (
-  `tamanos_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `porciones` int(11) NOT NULL,
   `precio_base` decimal(10,2) NOT NULL
@@ -166,7 +137,7 @@ CREATE TABLE `tamanos` (
 -- Volcado de datos para la tabla `tamanos`
 --
 
-INSERT INTO `tamanos` (`tamanos_id`, `nombre`, `porciones`, `precio_base`) VALUES
+INSERT INTO `tamanos` (`id`, `nombre`, `porciones`, `precio_base`) VALUES
 (1, 'Pequeña', 4, 5000.00),
 (2, 'Mediana', 8, 8000.00),
 (3, 'Grande', 12, 12000.00);
@@ -178,11 +149,11 @@ INSERT INTO `tamanos` (`tamanos_id`, `nombre`, `porciones`, `precio_base`) VALUE
 --
 
 CREATE TABLE `tortas` (
-  `tortas_id` int(11) NOT NULL,
-  `pedidos_id` int(11) NOT NULL,
-  `sabores_id` int(11) NOT NULL,
-  `coberturas_id` int(11) NOT NULL,
-  `tamanos_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `pedido_id` int(11) NOT NULL,
+  `sabor_id` int(11) NOT NULL,
+  `cobertura_id` int(11) NOT NULL,
+  `tamano_id` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -190,7 +161,7 @@ CREATE TABLE `tortas` (
 -- Volcado de datos para la tabla `tortas`
 --
 
-INSERT INTO `tortas` (`tortas_id`, `pedidos_id`, `sabores_id`, `coberturas_id`, `tamanos_id`, `precio_unitario`) VALUES
+INSERT INTO `tortas` (`id`, `pedido_id`, `sabor_id`, `cobertura_id`, `tamano_id`, `precio_unitario`) VALUES
 (1, 1, 5, 1, 2, 9400.00);
 
 --
@@ -202,9 +173,9 @@ CREATE TRIGGER `actualizar_total_pedido` AFTER INSERT ON `tortas` FOR EACH ROW B
     SET p.total = (
         SELECT SUM(t.precio_unitario)
         FROM tortas t
-        WHERE t.pedidos_id = NEW.pedidos_id
+        WHERE t.pedido_id = NEW.pedido_id
     )
-    WHERE p.pedidos_id = NEW.pedidos_id;
+    WHERE p.id = NEW.pedido_id;
 END
 $$
 DELIMITER ;
@@ -214,9 +185,9 @@ CREATE TRIGGER `actualizar_total_pedido_delete` AFTER DELETE ON `tortas` FOR EAC
     SET p.total = (
         SELECT COALESCE(SUM(t.precio_unitario), 0)
         FROM tortas t
-        WHERE t.pedidos_id = OLD.pedidos_id
+        WHERE t.pedido_id = OLD.pedido_id
     )
-    WHERE p.pedidos_id = OLD.pedidos_id;
+    WHERE p.id = OLD.pedido_id;
 END
 $$
 DELIMITER ;
@@ -226,9 +197,9 @@ CREATE TRIGGER `actualizar_total_pedido_update` AFTER UPDATE ON `tortas` FOR EAC
     SET p.total = (
         SELECT SUM(t.precio_unitario)
         FROM tortas t
-        WHERE t.pedidos_id = NEW.pedidos_id
+        WHERE t.pedido_id = NEW.pedido_id
     )
-    WHERE p.pedidos_id = NEW.pedidos_id;
+    WHERE p.id = NEW.pedido_id;
 END
 $$
 DELIMITER ;
@@ -240,17 +211,46 @@ DELIMITER ;
 --
 
 CREATE TABLE `tortas_rellenos` (
-  `tortas_id` int(11) NOT NULL,
-  `rellenos_id` int(11) NOT NULL
+  `torta_id` int(11) NOT NULL,
+  `relleno_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tortas_rellenos`
 --
 
-INSERT INTO `tortas_rellenos` (`tortas_id`, `rellenos_id`) VALUES
+INSERT INTO `tortas_rellenos` (`torta_id`, `relleno_id`) VALUES
 (1, 1),
 (1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `contrasena_hash` varchar(255) DEFAULT NULL,
+  `rol` enum('cliente','admin') NOT NULL DEFAULT 'cliente',
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `direccion`, `contrasena_hash`, `rol`, `fecha_registro`) VALUES
+(1, 'Admin Principal', 'admin@pasteleria.com', '111111111', 'Oficina Central', '$2y$10$EjemploHashAdmin123', 'admin', '2026-04-14 23:13:02'),
+(2, 'Laura Martínez', 'laura@pasteleria.com', '222222222', 'Sucursal Norte', '$2y$10$EjemploHashLaura456', 'admin', '2026-04-14 23:13:02'),
+(3, 'Juan Pérez', 'juan@email.com', '123456789', 'Calle Principal 123', NULL, 'cliente', '2026-04-14 23:13:02'),
+(4, 'María Gómez', 'maria@email.com', '987654321', 'Avenida Central 456', NULL, 'cliente', '2026-04-14 23:13:02'),
+(5, 'Carlos López', 'carlos@email.com', '555555555', 'Plaza Mayor 789', '$2y$10$ClienteConCuenta789', 'cliente', '2026-04-14 23:13:02'),
+(6, 'Ana Rodríguez', 'ana@email.com', '444444444', 'Barrio Los Pinos 321', NULL, 'cliente', '2026-04-14 23:13:02');
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,7 @@ INSERT INTO `tortas_rellenos` (`tortas_id`, `rellenos_id`) VALUES
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `vista_pedidos_completos` (
-`pedidos_id` int(11)
+`pedido_id` int(11)
 ,`cliente_nombre` varchar(100)
 ,`cliente_telefono` varchar(20)
 ,`cliente_email` varchar(100)
@@ -277,7 +277,7 @@ CREATE TABLE `vista_pedidos_completos` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `vista_pedidos_detalle` (
-`pedidos_id` int(11)
+`pedido_id` int(11)
 ,`cliente_nombre` varchar(100)
 ,`cliente_telefono` varchar(20)
 ,`cliente_email` varchar(100)
@@ -288,7 +288,7 @@ CREATE TABLE `vista_pedidos_detalle` (
 ,`dias_preparacion` int(7)
 ,`total` decimal(10,2)
 ,`estado` enum('pendiente','en preparacion','listo','entregado')
-,`tortas_id` int(11)
+,`torta_id` int(11)
 ,`sabor` varchar(50)
 ,`sabor_precio_extra` decimal(10,2)
 ,`cobertura` varchar(50)
@@ -309,7 +309,7 @@ CREATE TABLE `vista_pedidos_detalle` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `vista_pedido_unico` (
-`pedidos_id` int(11)
+`pedido_id` int(11)
 ,`cliente` varchar(100)
 ,`telefono` varchar(20)
 ,`direccion` varchar(200)
@@ -317,7 +317,7 @@ CREATE TABLE `vista_pedido_unico` (
 ,`fecha_entrega` varchar(10)
 ,`total` varchar(18)
 ,`estado` enum('pendiente','en preparacion','listo','entregado')
-,`tortas_id` int(11)
+,`torta_id` int(11)
 ,`sabor` varchar(50)
 ,`rellenos` mediumtext
 ,`cobertura` varchar(50)
@@ -333,7 +333,7 @@ CREATE TABLE `vista_pedido_unico` (
 --
 DROP TABLE IF EXISTS `vista_pedidos_completos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_completos`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente_nombre`, `c`.`telefono` AS `cliente_telefono`, `c`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion` FROM (`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_completos`  AS SELECT `p`.`id` AS `pedido_id`, `u`.`nombre` AS `cliente_nombre`, `u`.`telefono` AS `cliente_telefono`, `u`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion` FROM (`pedidos` `p` join `usuarios` `u` on(`p`.`usuario_id` = `u`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -342,7 +342,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vista_pedidos_detalle`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_detalle`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente_nombre`, `c`.`telefono` AS `cliente_telefono`, `c`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido_formato`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega_formato`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, coalesce(`s`.`precio_extra`,0) AS `sabor_precio_extra`, `co`.`nombre` AS `cobertura`, coalesce(`co`.`precio_extra`,0) AS `cobertura_precio_extra`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, `tm`.`precio_base` AS `precio_base`, coalesce(group_concat(distinct `r`.`nombre` order by `r`.`nombre` ASC separator ' + '),'Sin relleno') AS `rellenos`, coalesce(group_concat(distinct concat(`r`.`nombre`,' ($',format(coalesce(`r`.`precio_extra`,0),0),')') separator ', '),'Sin relleno') AS `rellenos_con_precio`, coalesce(sum(`r`.`precio_extra`),0) AS `total_extra_rellenos`, `t`.`precio_unitario` AS `precio_unitario` FROM (((((((`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) left join `tortas_rellenos` `tr` on(`t`.`tortas_id` = `tr`.`tortas_id`)) left join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) GROUP BY `t`.`tortas_id`, `p`.`pedidos_id`, `c`.`clientes_id`, `s`.`sabores_id`, `co`.`coberturas_id`, `tm`.`tamanos_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedidos_detalle`  AS SELECT `p`.`id` AS `pedido_id`, `u`.`nombre` AS `cliente_nombre`, `u`.`telefono` AS `cliente_telefono`, `u`.`email` AS `cliente_email`, `p`.`fecha_pedido` AS `fecha_pedido`, `p`.`fecha_entrega` AS `fecha_entrega`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido_formato`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega_formato`, to_days(`p`.`fecha_entrega`) - to_days(`p`.`fecha_pedido`) AS `dias_preparacion`, `p`.`total` AS `total`, `p`.`estado` AS `estado`, `t`.`id` AS `torta_id`, `s`.`nombre` AS `sabor`, coalesce(`s`.`precio_extra`,0) AS `sabor_precio_extra`, `co`.`nombre` AS `cobertura`, coalesce(`co`.`precio_extra`,0) AS `cobertura_precio_extra`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, `tm`.`precio_base` AS `precio_base`, coalesce(group_concat(distinct `r`.`nombre` order by `r`.`nombre` ASC separator ' + '),'Sin relleno') AS `rellenos`, coalesce(group_concat(distinct concat(`r`.`nombre`,' ($',format(coalesce(`r`.`precio_extra`,0),0),')') separator ', '),'Sin relleno') AS `rellenos_con_precio`, coalesce(sum(`r`.`precio_extra`),0) AS `total_extra_rellenos`, `t`.`precio_unitario` AS `precio_unitario` FROM (((((((`pedidos` `p` join `usuarios` `u` on(`p`.`usuario_id` = `u`.`id`)) join `tortas` `t` on(`p`.`id` = `t`.`pedido_id`)) join `sabores` `s` on(`t`.`sabor_id` = `s`.`id`)) join `coberturas` `co` on(`t`.`cobertura_id` = `co`.`id`)) join `tamanos` `tm` on(`t`.`tamano_id` = `tm`.`id`)) left join `tortas_rellenos` `tr` on(`t`.`id` = `tr`.`torta_id`)) left join `rellenos` `r` on(`tr`.`relleno_id` = `r`.`id`)) GROUP BY `t`.`id`, `p`.`id`, `u`.`id`, `s`.`id`, `co`.`id`, `tm`.`id` ;
 
 -- --------------------------------------------------------
 
@@ -351,24 +351,17 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vista_pedido_unico`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedido_unico`  AS SELECT `p`.`pedidos_id` AS `pedidos_id`, `c`.`nombre` AS `cliente`, `c`.`telefono` AS `telefono`, `c`.`direccion` AS `direccion`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega`, concat('S/. ',format(`p`.`total`,2)) AS `total`, `p`.`estado` AS `estado`, `t`.`tortas_id` AS `tortas_id`, `s`.`nombre` AS `sabor`, (select group_concat(`r`.`nombre` separator ' + ') from (`tortas_rellenos` `tr` join `rellenos` `r` on(`tr`.`rellenos_id` = `r`.`rellenos_id`)) where `tr`.`tortas_id` = `t`.`tortas_id`) AS `rellenos`, `co`.`nombre` AS `cobertura`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, concat('S/. ',format(`t`.`precio_unitario`,2)) AS `precio_unitario` FROM (((((`pedidos` `p` join `clientes` `c` on(`p`.`clientes_id` = `c`.`clientes_id`)) join `tortas` `t` on(`p`.`pedidos_id` = `t`.`pedidos_id`)) join `sabores` `s` on(`t`.`sabores_id` = `s`.`sabores_id`)) join `coberturas` `co` on(`t`.`coberturas_id` = `co`.`coberturas_id`)) join `tamanos` `tm` on(`t`.`tamanos_id` = `tm`.`tamanos_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_pedido_unico`  AS SELECT `p`.`id` AS `pedido_id`, `u`.`nombre` AS `cliente`, `u`.`telefono` AS `telefono`, `u`.`direccion` AS `direccion`, date_format(`p`.`fecha_pedido`,'%d/%m/%Y') AS `fecha_pedido`, date_format(`p`.`fecha_entrega`,'%d/%m/%Y') AS `fecha_entrega`, concat('S/. ',format(`p`.`total`,2)) AS `total`, `p`.`estado` AS `estado`, `t`.`id` AS `torta_id`, `s`.`nombre` AS `sabor`, (select group_concat(`r`.`nombre` separator ' + ') from (`tortas_rellenos` `tr` join `rellenos` `r` on(`tr`.`relleno_id` = `r`.`id`)) where `tr`.`torta_id` = `t`.`id`) AS `rellenos`, `co`.`nombre` AS `cobertura`, `tm`.`nombre` AS `tamaño`, `tm`.`porciones` AS `porciones`, concat('S/. ',format(`t`.`precio_unitario`,2)) AS `precio_unitario` FROM (((((`pedidos` `p` join `usuarios` `u` on(`p`.`usuario_id` = `u`.`id`)) join `tortas` `t` on(`p`.`id` = `t`.`pedido_id`)) join `sabores` `s` on(`t`.`sabor_id` = `s`.`id`)) join `coberturas` `co` on(`t`.`cobertura_id` = `co`.`id`)) join `tamanos` `tm` on(`t`.`tamano_id` = `tm`.`id`)) ;
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`clientes_id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
 -- Indices de la tabla `coberturas`
 --
 ALTER TABLE `coberturas`
-  ADD PRIMARY KEY (`coberturas_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `nombre_2` (`nombre`);
 
@@ -376,93 +369,100 @@ ALTER TABLE `coberturas`
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`pedidos_id`),
-  ADD KEY `clientes_id` (`clientes_id`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`),
   ADD KEY `fecha_pedido` (`fecha_pedido`);
 
 --
 -- Indices de la tabla `rellenos`
 --
 ALTER TABLE `rellenos`
-  ADD PRIMARY KEY (`rellenos_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `sabores`
 --
 ALTER TABLE `sabores`
-  ADD PRIMARY KEY (`sabores_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `tamanos`
 --
 ALTER TABLE `tamanos`
-  ADD PRIMARY KEY (`tamanos_id`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `tortas`
 --
 ALTER TABLE `tortas`
-  ADD PRIMARY KEY (`tortas_id`),
-  ADD KEY `pedidos_id` (`pedidos_id`),
-  ADD KEY `sabores_id` (`sabores_id`),
-  ADD KEY `coberturas_id` (`coberturas_id`),
-  ADD KEY `tamanos_id` (`tamanos_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedido_id` (`pedido_id`),
+  ADD KEY `sabor_id` (`sabor_id`),
+  ADD KEY `cobertura_id` (`cobertura_id`),
+  ADD KEY `tamano_id` (`tamano_id`);
 
 --
 -- Indices de la tabla `tortas_rellenos`
 --
 ALTER TABLE `tortas_rellenos`
-  ADD PRIMARY KEY (`tortas_id`,`rellenos_id`),
-  ADD KEY `rellenos_id` (`rellenos_id`);
+  ADD PRIMARY KEY (`torta_id`,`relleno_id`),
+  ADD KEY `relleno_id` (`relleno_id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  MODIFY `clientes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `coberturas`
 --
 ALTER TABLE `coberturas`
-  MODIFY `coberturas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedidos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rellenos`
 --
 ALTER TABLE `rellenos`
-  MODIFY `rellenos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `sabores`
 --
 ALTER TABLE `sabores`
-  MODIFY `sabores_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tamanos`
 --
 ALTER TABLE `tamanos`
-  MODIFY `tamanos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tortas`
 --
 ALTER TABLE `tortas`
-  MODIFY `tortas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -472,23 +472,23 @@ ALTER TABLE `tortas`
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `fk_pedidos_cliente` FOREIGN KEY (`clientes_id`) REFERENCES `clientes` (`clientes_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pedidos_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tortas`
 --
 ALTER TABLE `tortas`
-  ADD CONSTRAINT `fk_tortas_cobertura` FOREIGN KEY (`coberturas_id`) REFERENCES `coberturas` (`coberturas_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tortas_pedido` FOREIGN KEY (`pedidos_id`) REFERENCES `pedidos` (`pedidos_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tortas_sabor` FOREIGN KEY (`sabores_id`) REFERENCES `sabores` (`sabores_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tortas_tamano` FOREIGN KEY (`tamanos_id`) REFERENCES `tamanos` (`tamanos_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tortas_cobertura` FOREIGN KEY (`cobertura_id`) REFERENCES `coberturas` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tortas_pedido` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tortas_sabor` FOREIGN KEY (`sabor_id`) REFERENCES `sabores` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tortas_tamano` FOREIGN KEY (`tamano_id`) REFERENCES `tamanos` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tortas_rellenos`
 --
 ALTER TABLE `tortas_rellenos`
-  ADD CONSTRAINT `fk_tr_relleno` FOREIGN KEY (`rellenos_id`) REFERENCES `rellenos` (`rellenos_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tr_torta` FOREIGN KEY (`tortas_id`) REFERENCES `tortas` (`tortas_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tr_relleno` FOREIGN KEY (`relleno_id`) REFERENCES `rellenos` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tr_torta` FOREIGN KEY (`torta_id`) REFERENCES `tortas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
