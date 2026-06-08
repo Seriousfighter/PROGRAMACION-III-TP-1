@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Coberturas</title>
-</head>
-<body>
+<?php
+$this->layout('layout', ["title" => "Ingrediente"]) ?>
     <h1>Listado de Coberturas</h1>
-    
-    <?php if (isLogged() && hasRole('admin')): ?>
-        <a href="/coberturas/create">Nueva Cobertura</a>
-    <?php endif; ?>
-    
+   
+
     <?php if (count($coberturas) === 0): ?>
         <p>No hay coberturas.</p>
     <?php else: ?>
@@ -40,5 +33,3 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
-</body>
-</html>

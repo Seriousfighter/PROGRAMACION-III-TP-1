@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Rellenos</title>
-</head>
-<body>
+<?php
+$this->layout('layout', ["title" => "Ingrediente"]) ?>
     <h1>Listado de Rellenos</h1>
     
     <?php if (isLogged() && hasRole('admin')): ?>
@@ -40,5 +36,3 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
-</body>
-</html>
