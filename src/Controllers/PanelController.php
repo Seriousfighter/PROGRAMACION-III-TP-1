@@ -15,7 +15,8 @@ class PanelController extends AuthController
         }
         $user = $_SESSION['user'] ?? null;
         $user= $user['name'];
-        return $this->render('panel', ['user' => $user]);
+        
+        return $this->render('panel', ['userfront' => $user]);
     }
 }
 
