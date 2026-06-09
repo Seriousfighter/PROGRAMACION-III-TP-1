@@ -6,7 +6,7 @@
 <body>
     <h1><?= isset($cobertura) ? 'Editar' : 'Nueva' ?> Cobertura</h1>
     
-    <form action="<?= isset($cobertura) ? '/coberturas/' . (int)$cobertura->id . '/update' : '/coberturas/store' ?>" method="POST">
+    <form action="<?= isset($cobertura) ? '/coberturas/' . (int)$cobertura->id : '/coberturas' ?>" method="POST">
         <label>
             Nombre:
             <input type="text" name="nombre" value="<?= isset($cobertura) ? htmlspecialchars((string)$cobertura->nombre) : '' ?>" required>

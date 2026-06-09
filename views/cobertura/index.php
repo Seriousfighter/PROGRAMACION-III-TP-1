@@ -1,8 +1,11 @@
 <?php
-$this->layout('layout', ["title" => "Ingrediente"]) ?>
+$this->layout('layout', ["title" => "Cobertura"]) ?>
     <h1>Listado de Coberturas</h1>
-   
-
+    
+    <?php if (isLogged() && hasRole('admin')): ?>
+        <a href="/coberturas/create">Nueva Cobertura</a>
+    <?php endif; ?>
+    
     <?php if (count($coberturas) === 0): ?>
         <p>No hay coberturas.</p>
     <?php else: ?>
