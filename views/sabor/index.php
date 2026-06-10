@@ -1,13 +1,13 @@
 <?php
-$this->layout('layout', ["title" => "Ingrediente"]) ?>
-    <h1>Listado de Rellenos</h1>
+$this->layout('layout', ["title" => "Sabores"]) ?>
+    <h1>Listado de Sabores</h1>
     
     <?php if (isLogged() && hasRole('admin')): ?>
-        <a href="/rellenos/create">Nuevo Relleno</a>
+        <a href="/sabores/create">Nuevo Sabor</a>
     <?php endif; ?>
     
-    <?php if (count($rellenos) === 0): ?>
-        <p>No hay rellenos.</p>
+    <?php if (count($sabores) === 0): ?>
+        <p>No hay sabores.</p>
     <?php else: ?>
         <table border="1">
             <tr>
@@ -18,16 +18,16 @@ $this->layout('layout', ["title" => "Ingrediente"]) ?>
                     <th>Acciones</th>
                 <?php endif; ?>
             </tr>
-            <?php foreach ($rellenos as $r): ?>
+            <?php foreach ($sabores as $s): ?>
             <tr>
-                <td><?= htmlspecialchars((string)$r->id) ?></td>
-                <td><?= htmlspecialchars((string)$r->nombre) ?></td>
-                <td><?= htmlspecialchars((string)$r->precio_extra) ?></td>
+                <td><?= htmlspecialchars((string)$s->id) ?></td>
+                <td><?= htmlspecialchars((string)$s->nombre) ?></td>
+                <td><?= htmlspecialchars((string)$s->precio_extra) ?></td>
                 
                 <?php if (isLogged() && hasRole('admin')): ?>
                     <td>
-                        <a href="/rellenos/<?= (int)$r->id ?>/edit">Editar</a>
-                        <form action="/rellenos/<?= (int)$r->id ?>/delete" method="POST" style="display:inline">
+                        <a href="/sabores/<?= (int)$s->id ?>/edit">Editar</a>
+                        <form action="/sabores/<?= (int)$s->id ?>/delete" method="POST" style="display:inline">
                             <button type="submit" onclick="return confirm('¿Eliminar?')">Eliminar</button>
                         </form>
                     </td>

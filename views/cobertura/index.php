@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Coberturas</title>
-</head>
-<body>
+<?php
+$this->layout('layout', ["title" => "Cobertura"]) ?>
     <h1>Listado de Coberturas</h1>
     
     <?php if (isLogged() && hasRole('admin')): ?>
@@ -40,5 +36,3 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
-</body>
-</html>
