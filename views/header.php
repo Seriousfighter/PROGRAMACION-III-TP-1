@@ -6,6 +6,7 @@
         <a href="/coberturas">Coberturas</a>
         <a href="/tamanos">Tamaños</a>
         <a href="/sabores">Sabores</a>
+        <a href="/tortas">Tortas</a>
         
         <?php if (isLogged()): ?>
             <form action="/logout" method="POST" style="display:inline">

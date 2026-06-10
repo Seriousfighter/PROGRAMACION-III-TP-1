@@ -12,6 +12,7 @@ use App\Controllers\CoberturaController;
 use App\Controllers\RellenoController;
 use App\Controllers\TamanoController;
 use App\Controllers\SaborController;
+use App\Controllers\TortaController;
 
 //login register
 $router->get('/login', [AuthController::class, 'showLogin']); //falta implementar el login, pero es solo para mostrar como se haria, no es necesario para el TP
@@ -72,3 +73,16 @@ $router->get('/sabores/{id:number}', [SaborController::class, 'show']);
 $router->get('/sabores/{id:number}/edit', [SaborController::class, 'edit']);
 $router->post('/sabores/{id:number}', [SaborController::class, 'update']);
 $router->delete('/sabores/{id:number}', [SaborController::class, 'destroy']);
+
+
+// Tortas
+// Rutas GET (mostrar formularios y listados)
+$router->get('/tortas', [TortaController::class, 'index']);
+$router->get('/tortas/create', [TortaController::class, 'create']);      // ← FORM NUEVA
+$router->get('/tortas/{id}', [TortaController::class, 'show']);
+$router->get('/tortas/{id}/edit', [TortaController::class, 'edit']);      // ← FORM EDITAR
+
+// Rutas POST (guardar)
+$router->post('/tortas/store', [TortaController::class, 'store']);        // ← GUARDAR NUEVA
+$router->post('/tortas/{id}/update', [TortaController::class, 'update']); // ← GUARDAR EDICIÓN
+$router->post('/tortas/{id}/delete', [TortaController::class, 'destroy']); // ← ELIMINAR
