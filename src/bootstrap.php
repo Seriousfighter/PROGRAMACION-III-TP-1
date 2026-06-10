@@ -31,6 +31,19 @@ ini_set("display_errors", "1");
 
 $request = ServerRequest::fromGlobals();
 
+// si en la request hay un campo _method, lo usamos para cambiar el método de la request, esto es útil para poder usar métodos PUT, PATCH y DELETE en formularios HTML, que solo soportan GET y POST
+// esta técnica se llama method spoofing y es comúnmente utilizada en frameworks como Laravel y Ruby on Rails
+// sino deberiamos usar js para hacer peticiones PUT, PATCH y DELETE, lo cual no es tan sencillo.
+if ($request->getMethod() === 'POST') {
+    $body = $request->getParsedBody();
+    if (is_array($body) && isset($body['_method'])) {
+        $spoofedMethod = strtoupper($body['_method']);
+        if (in_array($spoofedMethod, ['PUT', 'PATCH', 'DELETE'], true)) {
+            $request = $request->withMethod($spoofedMethod);
+        }
+    }
+}
+
 $builder = new DI\ContainerBuilder;
 
 $builder->addDefinitions([ ResponseFactoryInterface::class => DI\create(HttpFactory::class),
