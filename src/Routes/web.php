@@ -8,6 +8,7 @@ use App\Controllers\IngredientsController;
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
+use App\Controllers\PedidoController;
 use App\Controllers\CoberturaController;
 use App\Controllers\RellenoController;
 use App\Controllers\TamanoController;
@@ -26,7 +27,8 @@ $router->get('/about', [HomeController::class, 'about']); //ejemplo, no es neces
 $router->get('/contact', [HomeController::class, 'contact']); //ejemplo
 
 $router->get('/panel', [PanelController::class, 'panel']); //ejemplo
-
+// Rutas para pedidos
+$router->get('/pedidos', [PedidoController::class, 'index']);
 $router->get('/ingredients', [IngredientsController::class, 'index']);
 $router->get('/ingredients/create', [IngredientsController::class, 'create']);
 $router->post('/ingredients', [IngredientsController::class, 'store']);
