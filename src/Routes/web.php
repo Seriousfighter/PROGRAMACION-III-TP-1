@@ -9,6 +9,7 @@ use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
 use App\Controllers\PedidoController;
+use App\Controllers\TortaController;
 
 //login register
 $router->get('/login', [AuthController::class, 'showLogin']); //falta implementar el login, pero es solo para mostrar como se haria, no es necesario para el TP
@@ -29,6 +30,11 @@ $router->get('/ingredients/create', [IngredientsController::class, 'create']);
 $router->post('/ingredients', [IngredientsController::class, 'store']);
 $router->get('/ingredients/{id:number}', [IngredientsController::class, 'show']);
 $router->put('/ingredients/{id:number}', [IngredientsController::class, 'update']); //faltan
-$router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan
+$router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan 
+
+
+// Agregar estas líneas
+$router->get('/tortas/crear', [TortaController::class, 'crear']);
+$router->post('/tortas', [TortaController::class, 'guardar']);
 
 
