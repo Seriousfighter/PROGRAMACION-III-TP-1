@@ -23,14 +23,16 @@ class AuthController extends AbstractController
         $email = trim((string)($data['email'] ?? '')); 
         $password = (string)($data['password'] ?? ''); 
         $user = User::where('email', $email)->first(); 
-        if (!$user || !password_verify($password, $user->password)) { 
+        
+        if (!$user || !password_verify($password, $user->contrasena_hash)) { 
             return $this->render('Auth/login', ['error' => 'Credenciales inválidas'], 401); 
         } 
+     
         $_SESSION['user'] = [ 
             'id' => $user->id, 
-            'name' => $user->name, 
+            'name' => $user->nombre, 
             'email' => $user->email, 
-            'role' => $user->role, 
+            'role' => $user->rol, 
         ]; 
         return $this->redirect('/panel'); 
     } 
@@ -49,17 +51,17 @@ class AuthController extends AbstractController
         }
 
         $user = User::create([
-            'name' => $name,
+            'nombre' => $name,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-            'role' => 'cliente',
+            'contrasena_hash' => password_hash($password, PASSWORD_DEFAULT),
+            'rol' => 'cliente',
         ]);
 
         $_SESSION['user'] = [
             'id' => $user->id,
-            'name' => $user->name,
+            'name' => $user->nombre,
             'email' => $user->email,
-            'role' => $user->role,
+            'role' => $user->rol,
         ];
 
         return $this->redirect('/panel');

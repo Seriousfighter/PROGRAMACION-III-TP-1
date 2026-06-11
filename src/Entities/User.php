@@ -7,7 +7,8 @@ Namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model{
-    protected $table = 'users';
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    public $timestamps = false;
+    protected $table = 'usuarios';
+    protected $fillable = ['nombre', 'email', 'contrasena_hash', 'rol'];
     protected $hidden = ['password'];
-}
+}   
