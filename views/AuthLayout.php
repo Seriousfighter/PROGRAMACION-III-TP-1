@@ -8,6 +8,7 @@
 
 <?php include dirname(__DIR__).'/views/header.php'; ?>
 <?php include dirname(__DIR__).'/views/UI/adminNav.php'; ?>
+
 <section>
     <?=  $this->section('content') ?>
 </section>
