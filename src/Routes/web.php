@@ -9,10 +9,13 @@ use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
 use App\Controllers\PedidoController;
+<<<<<<< HEAD
+=======
 use App\Controllers\CoberturaController;
 use App\Controllers\RellenoController;
 use App\Controllers\TamanoController;
 use App\Controllers\SaborController;
+>>>>>>> 584df76d791b10d803b592c89df885ec88d35a5e
 use App\Controllers\TortaController;
 
 //login register
@@ -34,7 +37,12 @@ $router->get('/ingredients/create', [IngredientsController::class, 'create']);
 $router->post('/ingredients', [IngredientsController::class, 'store']);
 $router->get('/ingredients/{id:number}', [IngredientsController::class, 'show']);
 $router->put('/ingredients/{id:number}', [IngredientsController::class, 'update']); //faltan
-$router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan
+$router->delete('/ingredients/{id:number}', [IngredientsController::class, 'destroy']); //faltan 
+
+
+// Agregar estas líneas
+$router->get('/tortas/crear', [TortaController::class, 'crear']);
+$router->post('/tortas', [TortaController::class, 'guardar']);
 
 // Coberturas
 $router->get('/coberturas', [CoberturaController::class, 'index']);

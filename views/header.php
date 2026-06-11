@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+<body>
+    <div>
+        <h1>Header</h1>
+        <?php include dirname(__DIR__) . '/views/UI/nav.php'; ?>
+    </div>
+=======
 <header>
     <h1>Header</h1>
     <nav>
@@ -17,3 +24,4 @@
         <?php endif; ?>
     </nav>
 </header>
+>>>>>>> 584df76d791b10d803b592c89df885ec88d35a5e
