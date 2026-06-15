@@ -1,9 +1,8 @@
 <nav class="navbar">
-            <a href="#" class="nav-logo">Tu Dulce Elección</a>
-            <ul class="nav-menu">
-                <li><a href="#about">Sobre Nosotros</a></li>
-                <li><a href="#how-it-works">Cómo Funciona</a></li>
-                <li><a href="registro.php">Registro</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </nav>
+    <a href="index.php" class="nav-logo">🍰 Tu Dulce Elección</a>
+    <ul class="nav-menu">
+        <li><a href="index.php">✨ Inicio</a></li>
+        <li><a href="cliente.php">🍰 Hacer mi torta</a></li>
+        <li><a href="admin-login.php">👑 Admin</a></li>
+    </ul>
+</nav>

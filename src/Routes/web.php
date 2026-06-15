@@ -9,13 +9,10 @@ use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\PanelController;
 use App\Controllers\PedidoController;
-<<<<<<< HEAD
-=======
 use App\Controllers\CoberturaController;
 use App\Controllers\RellenoController;
 use App\Controllers\TamanoController;
 use App\Controllers\SaborController;
->>>>>>> 584df76d791b10d803b592c89df885ec88d35a5e
 use App\Controllers\TortaController;
 
 //login register

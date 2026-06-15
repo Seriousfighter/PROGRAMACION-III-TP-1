@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Dulce Elección - Tu torta ideal</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesJunto.css">
 </head>
 <body>
     <header class="site-header">

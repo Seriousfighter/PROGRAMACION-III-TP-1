@@ -1,3 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-	console.log('La app cargó correctamente desde el front controller.');
-});
+function deleteRelleno(button) {
+        console.log('Botón eliminar presionado para el relleno con ID:');
+        }

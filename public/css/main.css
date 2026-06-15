@@ -174,3 +174,11 @@ ol {
 .inline-link:hover {
 	text-decoration: underline;
 }
+#btn-delete-1 {
+	background: #ef4444;
+	color: #fff;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 8px;
+	cursor: pointer;
+}

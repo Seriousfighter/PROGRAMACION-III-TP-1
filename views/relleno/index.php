@@ -28,7 +28,7 @@ $this->layout('layout', ["title" => "Ingrediente"]) ?>
                     <td>
                         <a href="/rellenos/<?= (int)$r->id ?>/edit">Editar</a>
                         <form action="/rellenos/<?= (int)$r->id ?>/delete" method="POST" style="display:inline">
-                            <button type="submit" onclick="return confirm('¿Eliminar?')">Eliminar</button>
+                            <button type="button" id="btn-delete-<?= (int)$r->id ?>" data-delete-action="/rellenos/<?= (int)$r->id ?>">Eliminar</button>
                         </form>
                     </td>
                 <?php endif; ?>
@@ -36,3 +36,4 @@ $this->layout('layout', ["title" => "Ingrediente"]) ?>
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
+
