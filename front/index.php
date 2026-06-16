@@ -5,7 +5,7 @@
             <h2 class="subtitle">TU TORTA IDEAL</h2>
             <p class="description">Diseñá tu torta perfecta con tus ingredientes favoritos.</p>
             
-            <a href="cliente.php" class="btn-primary-large">✨ Quiero mi torta →</a>
+            <a href="torta-create.php" class="btn-primary-large">✨ Quiero mi torta →</a>
             
             <div class="auth-buttons">
                 <button class="btn-outline" onclick="location.href='registro.php?tab=registro'">Registrarse</button>

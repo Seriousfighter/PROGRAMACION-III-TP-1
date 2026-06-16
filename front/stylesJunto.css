@@ -11,8 +11,6 @@ body {
     font-family: 'Quicksand', 'Segoe UI', 'Poppins', system-ui, sans-serif;
     background: linear-gradient(135deg, #f0c3db 0%, #f7d0e0 100%);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 /* ============================================
@@ -661,6 +659,7 @@ select {
 /* ============================================
    ADMIN - PANEL COMPLETO
    ============================================ */
+
 .admin-container {
     display: flex;
     gap: 2rem;
@@ -668,12 +667,10 @@ select {
     margin: 0 auto;
     padding: 1rem;
     align-items: stretch;
-    flex: 1;
 }
 
 .admin-sidebar {
     width: 280px;
-    min-width: 280px;
     background: linear-gradient(180deg, #fe39b9 0%, #e976a7 100%);
     color: white;
     padding: 2rem 1.5rem;
@@ -700,8 +697,7 @@ select {
 
 .admin-menu {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 2rem 0;
     flex: 1;
 }
 
@@ -943,7 +939,6 @@ select {
     color: #e976a7;
     font-size: 0.8rem;
 }
-
 /* ============================================
    MODALES
    ============================================ */
@@ -1014,9 +1009,8 @@ select {
     color: #fe39b9;
     font-weight: 500;
 }
-
 /* ============================================
-   FOOTER
+   FOOTER - CORREGIDO
    ============================================ */
 .site-footer {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -1029,10 +1023,22 @@ select {
     width: 100%;
 }
 
+/* Para que el footer siempre quede abajo */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.admin-container {
+    flex: 1;
+}
+
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE - MODO SANDWICH COMPLETO
    ============================================ */
 @media (max-width: 768px) {
+    /* Navbar modo sandwich */
     .navbar {
         flex-direction: column;
         gap: 0.8rem;
@@ -1059,13 +1065,13 @@ select {
         padding: 0.5rem;
     }
     
+    /* Admin sidebar - modo sandwich */
     .admin-container {
         flex-direction: column;
     }
     
     .admin-sidebar {
         width: 100%;
-        min-width: 100%;
         position: relative;
         height: auto;
         padding: 1rem;
@@ -1096,6 +1102,7 @@ select {
         padding: 1rem;
     }
     
+    /* Tablas responsivas */
     .pedidos-table-container {
         overflow-x: auto;
     }
@@ -1110,6 +1117,7 @@ select {
         font-size: 0.8rem;
     }
     
+    /* Stats grid responsive */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
@@ -1127,6 +1135,7 @@ select {
         font-size: 0.7rem;
     }
     
+    /* Quick buttons */
     .quick-buttons {
         flex-direction: column;
     }
@@ -1136,6 +1145,7 @@ select {
         text-align: center;
     }
     
+    /* Items grid */
     .items-grid {
         gap: 0.5rem;
     }
@@ -1145,6 +1155,7 @@ select {
         padding: 0.3rem 0.8rem;
     }
     
+    /* Welcome card */
     .welcome-card {
         padding: 1rem;
     }
@@ -1153,36 +1164,16 @@ select {
         font-size: 1.3rem;
     }
     
+    /* Modal responsive */
     .modal-content {
         width: 95%;
         padding: 1.5rem;
     }
     
+    /* Botón logout */
     #logoutBtn {
         padding: 0.5rem;
         font-size: 0.9rem;
-    }
-    
-    .customize-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .landing-content {
-        padding: 2rem;
-        margin: 1rem;
-    }
-    
-    .brand-title {
-        font-size: 2rem;
-    }
-    
-    .subtitle {
-        font-size: 1.5rem;
-    }
-    
-    .auth-container {
-        margin: 1rem;
-        padding: 1.5rem;
     }
 }
 
@@ -1208,5 +1199,59 @@ select {
     .btn-accion {
         width: 100%;
         text-align: center;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 20px;
+    }
+    
+    .nav-menu {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .admin-sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .customize-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-container {
+        flex-direction: column;
+    }
+    
+    .landing-content {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .brand-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .auth-container {
+        margin: 1rem;
+        padding: 1.5rem;
     }
 }

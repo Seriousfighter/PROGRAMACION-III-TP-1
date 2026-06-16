@@ -11,7 +11,7 @@ include 'header.php';
         <p>📞 En breve nos pondremos en contacto<br>para coordinar fecha y retiro.</p>
         <div>
             <button class="btn-primary" onclick="location.href='index.php'">Volver al inicio</button>
-            <button class="btn-outline" onclick="location.href='cliente.php'">Hacer otro pedido</button>
+            <button class="btn-outline" onclick="location.href='torta-create.php'">Hacer otro pedido</button>
         </div>
     </div>
 </div>
