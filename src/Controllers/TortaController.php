@@ -7,6 +7,10 @@ namespace App\Controllers;
 use App\Entities\Torta;
 use Framework\Controller\AbstractController;
 use Psr\Http\Message\ServerRequestInterface;
+use App\Entities\Sabor;
+use App\Entities\Cobertura;
+use App\Entities\Tamano;
+use App\Entities\Relleno;
 
 
 
