@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Entities\Cobertura;
+use App\Entities\Relleno;
+use App\Entities\Sabor;
+use App\Entities\Tamano;
+
+
 use Illuminate\Database\Eloquent\Model;
 
 class Torta extends Model

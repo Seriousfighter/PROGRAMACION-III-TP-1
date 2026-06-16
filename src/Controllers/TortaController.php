@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Entities\Torta;
+use Framework\Controller\AbstractController;
+use Psr\Http\Message\ServerRequestInterface;
+
+
+
 class TortaController extends AbstractController
 {
 
     public function index()
+    
     {
         $tortas = Torta::with(['sabor', 'cobertura', 'tamano', 'rellenos'])->get();
         return $this->render('torta/index', ['tortas' => $tortas]);
