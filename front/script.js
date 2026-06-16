@@ -549,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initAdminLogin();
     } else if (filename === 'admin.php') {
         initAdmin();
-    } else if (filename === 'cliente.php') {
+    } else if (filename === 'torta-create.php') {
         initCliente();
     } else if (filename === 'resumen.php') {
         initResumen();
