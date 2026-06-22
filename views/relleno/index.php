@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Rellenos</title>
-</head>
-<body>
+<?php
+$this->layout('layout', ["title" => "Ingrediente"]) ?>
     <h1>Listado de Rellenos</h1>
     
     <?php if (isLogged() && hasRole('admin')): ?>
@@ -32,7 +28,7 @@
                     <td>
                         <a href="/rellenos/<?= (int)$r->id ?>/edit">Editar</a>
                         <form action="/rellenos/<?= (int)$r->id ?>/delete" method="POST" style="display:inline">
-                            <button type="submit" onclick="return confirm('¿Eliminar?')">Eliminar</button>
+                            <button type="button" id="btn-delete-<?= (int)$r->id ?>" data-delete-action="/rellenos/<?= (int)$r->id ?>">Eliminar</button>
                         </form>
                     </td>
                 <?php endif; ?>
@@ -40,5 +36,4 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
-</body>
-</html>
+
