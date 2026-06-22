@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Nuevo Pedido']) ?>
+<?php $this->layout('layout', ['title' => 'Personalizar mi torta']) ?>
 
 <div class="container mt-4">
     <h1>Crear Torta para Nuevo Pedido</h1>

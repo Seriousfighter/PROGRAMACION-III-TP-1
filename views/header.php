@@ -1,5 +1,4 @@
-<header>
-    <h1>Header</h1>
+<header class="site-header">
     <nav>
         <?php include dirname(__DIR__).'/views/UI/nav.php'; ?>
         
