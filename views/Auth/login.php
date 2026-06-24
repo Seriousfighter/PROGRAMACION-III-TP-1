@@ -2,7 +2,7 @@
 <h1>Iniciar sesión</h1> 
 <?php if (!empty($error)): ?><p><?= $this->e($error) ?></p><?php endif; ?> 
 <div class="auth-container">
-    <a href="index.php" class="back-link">← Volver al inicio</a>
+    <a href="/" class="back-link">← Volver al inicio</a>
     
     <div class="admin-login-icon">🍰</div>
     <h1 style="text-align: center; color: #fe39b9; font-size: 1.8rem;">Iniciar Sesión</h1>
