@@ -13,7 +13,7 @@ include 'header.php';
     <form id="loginForm" class="login-form">
         <div class="form-group">
             <label>📧 Correo electrónico o usuario</label>
-            <input type="text" id="username" placeholder="tu@email.com" required>
+            <input type="email" id="username" placeholder="tu@email.com" required>
         </div>
 
         <div class="form-group">

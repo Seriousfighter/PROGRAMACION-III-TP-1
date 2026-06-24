@@ -13,7 +13,7 @@
     <!-- Login -->
     <div id="loginPanel" class="auth-panel active">
         <h3>Iniciar sesión</h3>
-        <form id="loginForm">
+        <form method="POST" action="/register" id="loginForm">
             <div class="form-group">
                 <label>Correo electrónico</label>
                 <input type="email" placeholder="tu@email.com" required>
